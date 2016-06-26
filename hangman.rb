@@ -1,21 +1,70 @@
-#start # ~> NameError: undefined local variable or method `thirsty' for main:Object
-word = "Putin"
-guesses = [10]    # ~> NameError: undefined local variable or method `game' for main:Object
+#start
+word = "Putin dictionary mancala judgement strategy patience thrones game coral"
+guesses = [10]
 rand_list = [organic, genetically, synthetic]
 puts "Let's play hangman"
 puts "Guess"
 guess = gets.chomp
+guess.push(guess)
 
-def initialize (word, guesses)
-    @word = word
-    @guesses = guesses
+
+
+hanged = <<You lose
+
+correct = <<You win
+
+word = words[rand(words.length) - 1]
+
+def get_placeholder sample_word, guessed_words
+  placeholder = ""
+  sample_word.chars { |char|
+    placeholder += (guessed_words.include? char)? char : '#'
+  }
+
+  placeholder
 end
 
 
+puts "clear"
+puts "Guess what is:" + get_placeholder(word, "")
+
+while true
+  print "Enter word [#{total_chances - wrong_try} chances left]:"
+
+  char = gets.chomp
+  puts "clear"
+
+if word.include? char
+
+if(right_guess.include? char)
+    puts char + "is already given"
+    puts " Try another:" + get_placeholder(word, right_guess)
+else
+  right_guess =  right_guess + char
+  placeholder = get_placeholder(word, right_guess)
+
+  puts "Great" + placeholder
+end
+
+unless placeholder.include? "#"
+  puts "Good Job!"
+  puts "You win"
+  break
+end
 
 
+else
+  puts "Wrong letter '#{char}'"
+  wrong_try += 1
+end
 
-# ~> NameError
-# ~> undefined local variable or method `game' for main:Object
-# ~>
-# ~> /Users/tonyun/Desktop/class/hangman/hangman.rb:2:in `<main>'
+
+if (wrong_try == total_chances)
+  puts "Loser"
+  break
+end
+
+
+else
+  puts "Try again: " + get_placeholder(word, right_guess)
+end
