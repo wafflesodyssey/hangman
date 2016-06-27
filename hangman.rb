@@ -1,22 +1,18 @@
 #start
-word = "Putin dictionary mancala judgement strategy patience thrones game coral"
-guesses = [10]
-rand_list = [organic, genetically, synthetic]
-puts "Let's play hangman"
-puts "Guess"
-guess = gets.chomp
-guess.push(guess)
+words = ["Putin", "dictionary", "mancala", "judgement", "strategy", "patience", "thrones", "game", "coral"]  # => "Putin dictionary mancala judgement strategy patience thrones game coral"
+total_chances = 10                                                               # => [10]
+puts "Let's play hangman"                                                          # => nil
+puts "Guess"                                                                       # => nil
+text = gets.chomp                                                                 # ~> NoMethodError: undefined method `chomp' for nil:NilClass
+wrong_try = 0
+right_guess = ""
 
-
-
-hanged = <<You lose
-
-correct = <<You win
 
 word = words[rand(words.length) - 1]
 
+
 def get_placeholder sample_word, guessed_words
-  placeholder = ""
+  placeholder = "_"
   sample_word.chars { |char|
     placeholder += (guessed_words.include? char)? char : '#'
   }
@@ -25,8 +21,10 @@ def get_placeholder sample_word, guessed_words
 end
 
 
+
 puts "clear"
 puts "Guess what is:" + get_placeholder(word, "")
+p word
 
 while true
   print "Enter word [#{total_chances - wrong_try} chances left]:"
@@ -34,37 +32,43 @@ while true
   char = gets.chomp
   puts "clear"
 
-if word.include? char
+  if word.include? char
 
-if(right_guess.include? char)
-    puts char + "is already given"
-    puts " Try another:" + get_placeholder(word, right_guess)
-else
-  right_guess =  right_guess + char
-  placeholder = get_placeholder(word, right_guess)
+    if(right_guess.include? char)
+        puts char + "is already given"
+        puts " Try another:" + get_placeholder(word, right_guess)
+    else
+      right_guess =  right_guess + char
+      placeholder = get_placeholder(word, right_guess)
 
-  puts "Great" + placeholder
-end
+      puts "Great" + placeholder
+    end
 
-unless placeholder.include? "#"
-  puts "Good Job!"
-  puts "You win"
-  break
-end
-
-
-else
-  puts "Wrong letter '#{char}'"
-  wrong_try += 1
-end
+    unless placeholder.include? "#"
+      puts "Good Job!"
+      puts "You win"
+      break
+    end
 
 
-if (wrong_try == total_chances)
-  puts "Loser"
-  break
-end
+  else
+    puts "Wrong letter '#{char}'"
+    wrong_try += 1
+  end
+
+  if (wrong_try == total_chances)
+    puts "Loser"
+    break
+  end
 
 
-else
   puts "Try again: " + get_placeholder(word, right_guess)
 end
+
+# >> Let's play hangman
+# >> Guess
+
+# ~> NoMethodError
+# ~> undefined method `chomp' for nil:NilClass
+# ~>
+# ~> /Users/tonyun/Desktop/class/hangman/hangman.rb:6:in `<main>'
