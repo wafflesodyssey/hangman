@@ -1,9 +1,9 @@
 #start
-words = ["Putin", "dictionary", "mancala", "judgement", "strategy", "patience", "thrones", "game", "coral"]  # => "Putin dictionary mancala judgement strategy patience thrones game coral"
-total_chances = 10                                                               # => [10]
-puts "Let's play hangman"                                                          # => nil
-puts "Guess"                                                                       # => nil
-text = gets.chomp                                                                 # ~> NoMethodError: undefined method `chomp' for nil:NilClass
+words = ["Putin", "dictionary", "mancala", "judgement", "strategy", "patience", "thrones", "game", "coral"]
+total_chances = 10
+puts "Let's play hangman"
+puts "Guess"
+text = gets.chomp
 wrong_try = 0
 right_guess = ""
 
@@ -64,11 +64,3 @@ while true
 
   puts "Try again: " + get_placeholder(word, right_guess)
 end
-
-# >> Let's play hangman
-# >> Guess
-
-# ~> NoMethodError
-# ~> undefined method `chomp' for nil:NilClass
-# ~>
-# ~> /Users/tonyun/Desktop/class/hangman/hangman.rb:6:in `<main>'
